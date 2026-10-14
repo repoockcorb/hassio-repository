@@ -114,7 +114,7 @@ If the worst happens and you need to restore the addon from scratch, you can
 1. download your home assistant backup,
 2. open up the tarball,
 3. find the shared folder tarball, and
-4. open the tarball and find the `9547a9e0-taiga` folder.
+4. open the tarball and find the `<hash>-taiga` folder.
 5. For each project json file, you can create a new project in taiga, and select the "Import Project" option, then upload the json file to recreate your project.
 
 #### Changing the update frequency

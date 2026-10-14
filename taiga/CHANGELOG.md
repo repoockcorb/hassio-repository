@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.0.10-p9] - 2026-10-14
+
+### Fixed
+
+- Postgres and RabbitMQ hostnames were hard-coded to the upstream repository's
+  `9547a9e0-` prefix, so the add-on couldn't reach them when installed from a
+  fork. They are now derived automatically (`host: auto`).
+- taiga-events now uses the configured RabbitMQ connection and secret key.
+
 ## [6.0.10-p8] - 2026-10-14
 
 ### Added
