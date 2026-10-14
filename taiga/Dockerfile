@@ -18,6 +18,7 @@ COPY init_postgres.sh /init_postgres.sh
 COPY backup.sh /backup.sh
 COPY taiga.sql /taiga.sql
 COPY nginx.conf /etc/nginx/conf.d/taiga.conf
+COPY taiga-locations.conf /etc/nginx/taiga-locations.conf
 RUN chown taiga /migrate.sh /run.sh /init_postgres.sh /taiga.sql /backup.sh
 CMD bash /start.sh
 # CMD sleep 200d

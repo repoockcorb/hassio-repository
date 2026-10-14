@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.10-p8] - 2026-10-14
+
+### Added
+
+- Direct web access on port 8081 alongside ingress, so Taiga can sit behind a
+  reverse proxy (e.g. Nginx Proxy Manager / Cloudflare Tunnel) on its own domain.
+
 ## [6.0.10-p5] - 2023-02-12
 
 ### Fixed

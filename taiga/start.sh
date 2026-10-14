@@ -37,9 +37,10 @@ SLUG=$(echo $HOSTNAME | sed -e 's/-/_/g')
 ADDON_INFO=$(curl  -H "Authorization: Bearer $SUPERVISOR_TOKEN" supervisor/addons/$SLUG/info)
 export INGRESS_ENTRY=$(echo $ADDON_INFO | jq -r '.data.ingress_entry')
 
-sed -i "s host_to_be_replaced host_to_be_replaced$INGRESS_ENTRY " /home/taiga/taiga-front-dist/dist/conf.json
-sed -i "s base_url_to_be_replaced $INGRESS_ENTRY/ " /home/taiga/taiga-front-dist/dist/conf.json
-sed -i 's,base href="/",base href="'"$INGRESS_ENTRY"'/",' /home/taiga/taiga-front-dist/dist/index.html
+# The ingress and direct-port nginx servers each rewrite this placeholder to
+# their own base path when serving the page
+sed -i 's,base href="/",base href="/ingress_path_placeholder/",' /home/taiga/taiga-front-dist/dist/index.html
+echo "set \$taiga_path \"$INGRESS_ENTRY\";" > /etc/nginx/taiga-ingress-path.conf
 
 # ENVIRONMENT="INGRESS_ENTRY='$INGRESS_ENTRY' TAIGA_SECRET_KEY=$TAIGA_SECRET_KEY RABBITMQ_DEFAULT_PASS='$RABBITMQ_DEFAULT_PASS'"
 VARIABLES="TAIGA_SECRET_KEY,INGRESS_ENTRY,RABBITMQ_DEFAULT_PASS,POSTGRES_PASSWORD,POSTGRES_HOST,POSTGRES_USER,POSTGRES_DB,RABBITMQ_VHOST,MINUTES_BETWEEN_BACKUPS"
